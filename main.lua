@@ -1272,8 +1272,9 @@ for i, v in pairs(game.Players:GetPlayers()) do
         v.Chatted:connect(function(msg)
             if msg == "RISEUSERDETECTEDCODE" then
                 VapeGui["CreateNotification"]("Rise", v.Name .. " is using Rise!", 10)
-            elseif msg == "RISEOWNERCODEREAL" then
-	    	    VapeGui["CreateNotification"]("Rise Detected", "Rise Owner is in ur game", 5)
+                if msg == "RISEOWNERCODEREAL" then
+	    	        VapeGui["CreateNotification"]("Rise Detected", "Rise Owner is in ur game", 5)
+                end
 	        end
         end)
     else
