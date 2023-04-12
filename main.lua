@@ -22,6 +22,18 @@ local risethemes = {
         TextGUIColor1 = Color3.fromRGB(255, 12, 12),
         TextGUIColor2 = Color3.fromRGB(255, 255, 255),
     },
+    ["Rise Sea"] = {
+        TextGUIColor1 = Color3.fromRGB(5, 2, 187),
+        TextGUIColor2 = Color3.fromRGB(122, 230, 247),
+    },
+    ["Rise Lean"] = {
+        TextGUIColor1 = Color3.fromRGB(116, 6, 255),
+        TextGUIColor2 = Color3.fromRGB(255, 255, 255),
+    },
+    ["Rise Emo"] = {
+        TextGUIColor1 = Color3.fromRGB(255, 255, 255),
+        TextGUIColor2 = Color3.fromRGB(95, 95, 95),
+    },
     ["Rise Cotton Candy"] = {
         TextGUIColor1 = Color3.fromRGB(241, 111, 204),
         TextGUIColor2 = Color3.fromRGB(101, 246, 254),
@@ -82,7 +94,6 @@ local function GetURL(scripturl)
 end
 local VapeGui
 local universalcolor = Color3.new(1, 1, 1)
-local targetinfohealthbar
 local guilib = loadstring(GetURL("guilib.lua", true))()
 guilib.ScreenGui.MainFrame.Visible = false
 spawn(function()
@@ -103,9 +114,6 @@ spawn(function()
                 colornew = risethemes[riseoptions.Theme].TextGUIColor2:lerp(risethemes[riseoptions.Theme].TextGUIColor1, num - 1)
             else
                 num = 0
-            end
-            if targetinfohealthbar then
-                targetinfohealthbar.BackgroundColor3 = colornew
             end
             universalcolor = colornew
             for i,v in pairs(notificationwindow:GetChildren()) do 
@@ -227,7 +235,7 @@ spawn(function()
     end
     VapeGui["MainGui"].ScaledGui.Visible = false
 end)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/NewMainScript.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/NewMainScript.lua"))()
 shared.VapeIndependent = true
 if not VapeGui then VapeGui = shared.GuiLibrary end
 local cachedassets = {}
@@ -248,7 +256,7 @@ local function getcustomassetfunc(path)
             textlabel:Remove()
         end)
         local req = requestfunc({
-            Url = "https://raw.githubusercontent.com/7GrandDadPGN/RiseForRoblox/main/"..path:gsub("rise/assets", "assets"),
+            Url = "https://raw.githubusercontent.com/NTDCore/RiseForRoblox/main/"..path:gsub("rise/assets", "assets"),
             Method = "GET"
         })
         writefile(path, req.Body)
@@ -266,7 +274,7 @@ local teleportfunc = game:GetService("Players").LocalPlayer.OnTeleport:Connect(f
              if shared.VapeDeveloper then
                  loadstring(readfile("rise/main.lua"))()
             else
-                loadstring(GetURL("main.lua"))()
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/RiseForRoblox/main/main.lua"))()
             end
         ]]
 		if shared.VapeDeveloper then
@@ -379,8 +387,6 @@ riseclient.com
     
 Roblox Port by 7GrandDad
 All rights goto the Rise Team
-
-Return And Fix By Monia
 ]]
 infolab4.TextXAlignment = Enum.TextXAlignment.Left
 infolab4.TextYAlignment = Enum.TextYAlignment.Top
@@ -604,9 +610,9 @@ targetinfopicture.Parent = targetinfopictureframe
 local targetinfopicturecorner = Instance.new("UICorner")
 targetinfopicturecorner.CornerRadius = UDim.new(0, 128)
 targetinfopicturecorner.Parent = targetinfopicture
-targetinfohealthbar = Instance.new("Frame")
+local targetinfohealthbar = Instance.new("Frame")
 targetinfohealthbar.Position = UDim2.new(0, 74, 0, 55)
-targetinfohealthbar.BackgroundColor3 = Color3.fromRGB(133, 77, 195)
+targetinfohealthbar.BackgroundColor3 = risethemes[riseoptions.Theme].TextGUIColor1
 targetinfohealthbar.BorderSizePixel = 0
 targetinfohealthbar.Size = UDim2.new(0, 140, 0, 10)
 targetinfohealthbar.Parent = targetinfo
@@ -645,14 +651,39 @@ local oldupdate = targetvape.UpdateInfo
 local lasthealth = 100
 local lastplr
 local healthanim
+local targetsize = 1
 local targetvisible = false
-targetvape.UpdateInfo = function(tab, targetsize)
-    targetvisible = (targetsize > 0)
+targetvape.UpdateInfo = function(tab)
+    local hasTarget = false
+	for i,v in pairs(targetvape.Targets) do
+        hasTarget = true
+		local plr = game:GetService("Players"):FindFirstChild(i)
+        if lastplr ~= plr then 
+            lastplr = plr
+        else
+            if v.Humanoid.Health < lasthealth then 
+                targetinfopictureframe.Size = UDim2.new(0, 59, 0, 58)
+                targetinfopictureframe:TweenSize(UDim2.new(0, 64, 0, 63), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.4, true)
+                if healthanim then 
+                    healthanim:Cancel()
+                end
+                targetinfodamage.BackgroundTransparency = 0.4
+                healthanim = game:GetService("TweenService"):Create(targetinfodamage, TweenInfo.new(0.4), {BackgroundTransparency = 1})
+                healthanim:Play()
+            end
+        end
+        lasthealth = v.Humanoid.Health
+		targetinfopicture.Image = 'rbxthumb://type=AvatarHeadShot&id='..v.Player.UserId..'&w=420&h=420'
+		targetinfohealthbar:TweenSize(UDim2.new(0, 140 * (v.Humanoid.Health / v.Humanoid.MaxHealth), 0, 10), Enum.EasingDirection.InOut, Enum.EasingStyle.Quad, 0.2, true)
+		local healthtext = (math.floor((v.Humanoid.Health / 5) * 10) / 10)
+        targetinfohealthtext.Text = healthtext..(tostring(healthtext):len() < 3 and ".0" or "")
+		targetinfoname.Text = v.Player.DisplayName or v.Player.Name
+	end
     if (targetsize > 0) then
         pcall(function()
             targetinfo:TweenSizeAndPosition(UDim2.new(0, 258, 0, 80), UDim2.new(0.5, 72, 0.5, 54), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0, true)
         end)
-        targetinfo.Visible = true
+        targetinfo.Visible = hasTarget
     else
         spawn(function()
             for i = 1, 30 do 
@@ -669,29 +700,6 @@ targetvape.UpdateInfo = function(tab, targetsize)
             targetinfo.Visible = false
         end)
     end
-	for i,v in pairs(tab) do
-		local plr = game:GetService("Players"):FindFirstChild(i)
-        if lastplr ~= plr then 
-            lastplr = plr
-        else
-            if v["Health"] < lasthealth then 
-                targetinfopictureframe.Size = UDim2.new(0, 59, 0, 58)
-                targetinfopictureframe:TweenSize(UDim2.new(0, 64, 0, 63), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.4, true)
-                if healthanim then 
-                    healthanim:Cancel()
-                end
-                targetinfodamage.BackgroundTransparency = 0.4
-                healthanim = game:GetService("TweenService"):Create(targetinfodamage, TweenInfo.new(0.4), {BackgroundTransparency = 1})
-                healthanim:Play()
-            end
-        end
-        lasthealth = v["Health"]
-		targetinfopicture.Image = 'rbxthumb://type=AvatarHeadShot&id='..v["UserId"]..'&w=420&h=420'
-		targetinfohealthbar:TweenSize(UDim2.new(0, 140 * (v["Health"] / v["MaxHealth"]), 0, 10), Enum.EasingDirection.InOut, Enum.EasingStyle.Quad, 0.2, true)
-		local healthtext = (math.floor((v["Health"] / 5) * 10) / 10)
-        targetinfohealthtext.Text = healthtext..(tostring(healthtext):len() < 3 and ".0" or "")
-		targetinfoname.Text = plr and plr.DisplayName or "Player"
-	end
     return oldupdate(tab, targetsize)
 end
 
@@ -719,7 +727,7 @@ risegradient.Parent = risetext
 local risetextversion = risetext:Clone()
 local risetextcustom = risetext:Clone()
 risetextversion.TextSize = 26
-risetextversion.Text = "5.94"
+risetextversion.Text = "5.95"
 risetextversion.Position = UDim2.new(0, 66, 0, 6)
 risetextversion.Parent = risetext
 risetextversion.TextLabel.TextSize = 26
@@ -1205,7 +1213,6 @@ local function LoadSettings()
         end
     end
 end
-
 
 LoadSettings()
 spawn(function()
