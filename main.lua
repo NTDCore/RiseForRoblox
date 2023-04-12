@@ -798,6 +798,8 @@ pcall(function()
     end
 end)
 
+VapeGui["CreateNotification"]("Hello Rise User", "i will added more theme soon.", 5)
+
 spawn(function()
     local val = 0
     repeat
