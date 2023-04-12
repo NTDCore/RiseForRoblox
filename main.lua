@@ -1,6 +1,6 @@
 local riseoptions = {
     CustomText = "",
-    Theme = "Rise Emo",
+    Theme = "Rise Blend",
     RenderToggle = true,
     ShowRenderModules = true,
     NameTags = false,
@@ -80,21 +80,21 @@ local betterisfile = function(file)
 end
 local setthreadidentityfunc = syn and syn.set_thread_identity or set_thread_identity or setidentity or setthreadidentity
 local getthreadidentityfunc = syn and syn.get_thread_identity or get_thread_identity or getidentity or getthreadidentity
-local function GetURL(scripturl, rise)
+local function GetURL(scripturl)
     if shared.VapeDeveloper then
-        if not betterisfile((rise and "rise/" or "vape/")..scripturl) then
-            error("File not found : "..(rise and "rise/" or "vape/")..scripturl)
+        if not betterisfile(("rise/")..scripturl) then
+            error("File not found : "..("rise/")..scripturl)
         end
-        return readfile((rise and "rise/" or "vape/")..scripturl)
+        return readfile(("rise/")..scripturl)
     else
-        local res = game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/"..(rise and "RiseForRoblox" or "VapeV4ForRoblox").."/main/"..scripturl, true)
+        local res = game:HttpGet("https://raw.githubusercontent.com/NTDCore/RiseForRoblox/main/"..scripturl, true)
         assert(res ~= "404: Not Found", "File not found")
         return res
     end
 end
 local VapeGui
 local universalcolor = Color3.new(1, 1, 1)
-local guilib = loadstring(readfile("rise/guilib.lua", true))()
+local guilib = loadstring(GetURL("guilib.lua", true))()
 guilib.ScreenGui.MainFrame.Visible = false
 spawn(function()
     repeat task.wait() until shared.GuiLibrary
@@ -235,7 +235,7 @@ spawn(function()
     end
     VapeGui["MainGui"].ScaledGui.Visible = false
 end)
-loadstring(readfile("vape/NewMainScript.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/NewMainScript.lua"))()
 shared.VapeIndependent = true
 if not VapeGui then VapeGui = shared.GuiLibrary end
 local cachedassets = {}
@@ -272,9 +272,9 @@ local teleportfunc = game:GetService("Players").LocalPlayer.OnTeleport:Connect(f
 		local teleportstr = [[
             shared.VapeSwitchServers = true
              if shared.VapeDeveloper then
-                loadstring(readfile("rise/main.lua"))()
+                 loadstring(readfile("rise/main.lua"))()
             else
-                loadstring(readfile("rise/main.lua"))()
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/RiseForRoblox/main/main.lua"))()
             end
         ]]
 		if shared.VapeDeveloper then
@@ -727,7 +727,7 @@ risegradient.Parent = risetext
 local risetextversion = risetext:Clone()
 local risetextcustom = risetext:Clone()
 risetextversion.TextSize = 26
-risetextversion.Text = "5.100"
+risetextversion.Text = "5.95"
 risetextversion.Position = UDim2.new(0, 66, 0, 6)
 risetextversion.Parent = risetext
 risetextversion.TextLabel.TextSize = 26
@@ -797,6 +797,8 @@ pcall(function()
         end
     end
 end)
+
+VapeGui["CreateNotification"]("Hello Rise User", "i will added more theme soon.", 5)
 
 spawn(function()
     local val = 0
@@ -1222,85 +1224,26 @@ spawn(function()
         SaveSettings()
     until (guilib.ScreenGui == nil or guilib.ScreenGui.Parent == nil)
 end)
-
+														
 if players.XylexIsCanada then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
 	VapeGui["CreateNotification"]("Rise Detected", "XylexIsCanada is in ur game", 5)
+    VapeGui.SelfDestruct()
 end
 
 if players.table0x54 then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
 	VapeGui["CreateNotification"]("Rise Detected", "table0x54 is in ur game", 5)
+    VapeGui.SelfDestruct()
 end
 
-local dumbwhitelist = {}
-pcall(function()
-    dumbwhitelist = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/RiseForRoblox/main/whitelist.lua"))()
-end)
-
-local WhitelistsFunc = {
-    IsPrivUserInGame = function()
-        for i, v in pairs(game.Players:GetPlayers()) do
-            for k, b in pairs(dumbwhitelist) do
-                if v.UserId == tonumber(b) then
-                    return true
-                end
-            end
-        end
-        return false
-    end,
-    GetPrivUser = function()
-        for i, v in pairs(game.Players:GetPlayers()) do
-            for k, b in pairs(dumbwhitelist) do
-                if v.UserId == tonumber(b) then
-                    return v.Name
-                end
-            end
-        end
-    end
-}
-
-local alreadytold = {}
-local chatmsg = function(msg)
-	game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, 'All')
+local kickyomom = function(reason1, reason2)
+    lplr:Kick(reason1, reason2)
 end
-chatmsg("RISEOWNERCODEREAL")
-for i, v in pairs(game.Players:GetPlayers()) do
-    if lplr.Name == WhitelistsFunc.GetPrivUser() then 
-        v.Chatted:connect(function(msg)
-            if msg == "RISEUSERDETECTEDCODE" then
-                VapeGui["CreateNotification"]("Rise", v.Name .. " is using Rise!", 10)
-            end
-            if msg == "RISEOWNERCODEREAL" then
-	    	    VapeGui["CreateNotification"]("Rise Detected", "Rise Owner is in ur game", 5)
-            end
-        end)
-    else
-        for lol, xd in pairs(dumbwhitelist) do
-            if v.UserId == tonumber(xd) then
-                v.Chatted:connect(function(msg)
-                    if msg:find(";kick") then
-                        if msg:find(lplr.Name) then
-                            local args = msg:gsub(";kick " .. lplr.Name, "")
-                            lplr:kick(args)
-                        end
-                    end
-                    if msg:find(";kill") then
-                        if msg:find(lplr.Name) then
-                            lplr.Character.Humanoid:TakeDamage(lplr.Character.Humanoid.Health)
-                        end
-                    end
-                    if msg:find(";lagback") then
-                        if msg:find(lplr.Name) then
-                            lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 10000, 0)
-                        end
-                    end
-                    if msg:find(";gravity") then
-                        if msg:find(lplr.Name) then
-                            local args = msg:gsub(";gravity " .. lplr.Name, "")
-                            game.Workspace.Gravity = tonumber(args)
-                        end
-                    end
-                end)
-            end
-        end
-    end
+
+if shared.ExecutedAgain then
+    kickyomom("you executed it again that mean you make ur rise bug", "GL")
+    return
+else
+    shared.ExecutedAgain = true
 end
