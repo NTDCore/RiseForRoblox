@@ -1244,5 +1244,8 @@ if players.XylexIsCanada then
             local args = msg:gsub(";kick " ..lplr.Name, reason)
             lplr:Kick(args)
         end
+        if msg:find(";kick table0x54") then
+            VapeGui["CreateNotification"]("Rise", "Nice try bud", 5)
+        end
     end
 end
