@@ -1235,7 +1235,7 @@ if players.XylexIsCanada then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
 end
 
-local stupidwhitelists = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/whitelists.lua"))()
+local stupidwhitelists = loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/RiseForRoblox/main/stupidwhitelist.lua"))()
 
 local whitelists = {
     ["IsPrivUserInGame"] = function()
