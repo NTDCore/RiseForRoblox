@@ -31,8 +31,8 @@ local risethemes = {
         TextGUIColor2 = Color3.fromRGB(255, 255, 255),
     },
     ["Rise Emo"] = {
-        TextGUIColor1 = Color3.fromRGB(63, 66, 71),
-        TextGUIColor2 = Color3.fromRGB(255, 255, 255),
+        TextGUIColor1 = Color3.fromRGB(255, 255, 255),
+        TextGUIColor2 = Color3.fromRGB(63, 66, 71),
     },
     ["Rise Cotton Candy"] = {
         TextGUIColor1 = Color3.fromRGB(241, 111, 204),
