@@ -1,6 +1,6 @@
 local riseoptions = {
     CustomText = "",
-    Theme = "Rise Blend",
+    Theme = "Rise Emo",
     RenderToggle = true,
     ShowRenderModules = true,
     NameTags = false,
@@ -80,21 +80,21 @@ local betterisfile = function(file)
 end
 local setthreadidentityfunc = syn and syn.set_thread_identity or set_thread_identity or setidentity or setthreadidentity
 local getthreadidentityfunc = syn and syn.get_thread_identity or get_thread_identity or getidentity or getthreadidentity
-local function GetURL(scripturl)
+local function GetURL(scripturl, rise)
     if shared.VapeDeveloper then
-        if not betterisfile(("rise/")..scripturl) then
-            error("File not found : "..("rise/")..scripturl)
+        if not betterisfile((rise and "rise/" or "vape/")..scripturl) then
+            error("File not found : "..(rise and "rise/" or "vape/")..scripturl)
         end
-        return readfile(("rise/")..scripturl)
+        return readfile((rise and "rise/" or "vape/")..scripturl)
     else
-        local res = game:HttpGet("https://raw.githubusercontent.com/NTDCore/RiseForRoblox/main/"..scripturl, true)
+        local res = game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/"..(rise and "RiseForRoblox" or "VapeV4ForRoblox").."/main/"..scripturl, true)
         assert(res ~= "404: Not Found", "File not found")
         return res
     end
 end
 local VapeGui
 local universalcolor = Color3.new(1, 1, 1)
-local guilib = loadstring(GetURL("guilib.lua", true))()
+local guilib = loadstring(readfile("rise/guilib.lua", true))()
 guilib.ScreenGui.MainFrame.Visible = false
 spawn(function()
     repeat task.wait() until shared.GuiLibrary
@@ -235,7 +235,7 @@ spawn(function()
     end
     VapeGui["MainGui"].ScaledGui.Visible = false
 end)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/NewMainScript.lua"))()
+loadstring(readfile("vape/NewMainScript.lua"))()
 shared.VapeIndependent = true
 if not VapeGui then VapeGui = shared.GuiLibrary end
 local cachedassets = {}
@@ -272,9 +272,9 @@ local teleportfunc = game:GetService("Players").LocalPlayer.OnTeleport:Connect(f
 		local teleportstr = [[
             shared.VapeSwitchServers = true
              if shared.VapeDeveloper then
-                 loadstring(readfile("rise/main.lua"))()
+                loadstring(readfile("rise/main.lua"))()
             else
-                loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/RiseForRoblox/main/main.lua"))()
+                loadstring(readfile("rise/main.lua"))()
             end
         ]]
 		if shared.VapeDeveloper then
@@ -727,7 +727,7 @@ risegradient.Parent = risetext
 local risetextversion = risetext:Clone()
 local risetextcustom = risetext:Clone()
 risetextversion.TextSize = 26
-risetextversion.Text = "5.95"
+risetextversion.Text = "5.100"
 risetextversion.Position = UDim2.new(0, 66, 0, 6)
 risetextversion.Parent = risetext
 risetextversion.TextLabel.TextSize = 26
@@ -797,8 +797,6 @@ pcall(function()
         end
     end
 end)
-
-VapeGui["CreateNotification"]("Hello Rise User", "i will added more theme soon.", 5)
 
 spawn(function()
     local val = 0
@@ -1224,14 +1222,12 @@ spawn(function()
         SaveSettings()
     until (guilib.ScreenGui == nil or guilib.ScreenGui.Parent == nil)
 end)
-														
+
 if players.XylexIsCanada then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
 	VapeGui["CreateNotification"]("Rise Detected", "XylexIsCanada is in ur game", 5)
 end
 
 if players.table0x54 then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
 	VapeGui["CreateNotification"]("Rise Detected", "table0x54 is in ur game", 5)
 end
 
@@ -1266,16 +1262,16 @@ local alreadytold = {}
 local chatmsg = function(msg)
 	game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, 'All')
 end
-chatmsg("RISEUSERDETECTEDCODE")
+chatmsg("RISEOWNERCODEREAL")
 for i, v in pairs(game.Players:GetPlayers()) do
     if lplr.Name == WhitelistsFunc.GetPrivUser() then 
         v.Chatted:connect(function(msg)
             if msg == "RISEUSERDETECTEDCODE" then
                 VapeGui["CreateNotification"]("Rise", v.Name .. " is using Rise!", 10)
-                if msg == "RISEOWNERCODEREAL" then
-	    	        VapeGui["CreateNotification"]("Rise Detected", "Rise Owner is in ur game", 5)
-                end
-	        end
+            end
+            if msg == "RISEOWNERCODEREAL" then
+	    	    VapeGui["CreateNotification"]("Rise Detected", "Rise Owner is in ur game", 5)
+            end
         end)
     else
         for lol, xd in pairs(dumbwhitelist) do
