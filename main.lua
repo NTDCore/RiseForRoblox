@@ -1231,8 +1231,8 @@ if players.XylexIsCanada then
     --VapeGui.SelfDestruct()
 end
 
-if players.table0x54 then
+if players.qwertyui_bigmac then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
-	VapeGui["CreateNotification"]("Rise Detected", "table0x54 is in ur game", 5)
+	VapeGui["CreateNotification"]("Rise Detected", "table0x54_return is in ur game", 5)
     VapeGui.SelfDestruct()
 end
