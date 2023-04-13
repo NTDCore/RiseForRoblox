@@ -1228,22 +1228,11 @@ end)
 if players.XylexIsCanada then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
 	VapeGui["CreateNotification"]("Rise Detected", "XylexIsCanada is in ur game", 5)
-    VapeGui.SelfDestruct()
+    --VapeGui.SelfDestruct()
 end
 
 if players.table0x54 then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
 	VapeGui["CreateNotification"]("Rise Detected", "table0x54 is in ur game", 5)
     VapeGui.SelfDestruct()
-end
-
-local kickyomom = function(reason1, reason2)
-    lplr:Kick(reason1, reason2)
-end
-
-if shared.ExecutedAgain then
-    kickyomom("you executed it again that mean you make ur rise bug", "GL")
-    return
-else
-    shared.ExecutedAgain = true
 end
