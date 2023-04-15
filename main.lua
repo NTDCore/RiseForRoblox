@@ -1225,9 +1225,9 @@ spawn(function()
     until (guilib.ScreenGui == nil or guilib.ScreenGui.Parent == nil)
 end)
 														
-if players.XylexIsCanada then
+if players.MaxlaserTechOnTop1 then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
-	VapeGui["CreateNotification"]("Rise Detected", "XylexIsCanada is in ur game", 5)
+	VapeGui["CreateNotification"]("Rise Detected", "MaxlaserTechOnBottom1 is in ur game", 5)
     --VapeGui.SelfDestruct()
 end
 
