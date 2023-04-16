@@ -1227,7 +1227,7 @@ end)
 
 if players.MaxlaserTechOnTop1 then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
-	VapeGui["CreateNotification"]("Rise Detected", "MaxSkidderTechOnTop1 is in ur game", 5)
+	VapeGui["CreateNotification"]("Rise Detected", "MaxlaserTechOnTop1 is in ur game", 5)
 end
 
 if players.qwertyui_bigmac then
