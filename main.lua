@@ -1240,7 +1240,7 @@ end
 if players.table0x472 then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
 	VapeGui["CreateNotification"]("Rise Detected", "table0x472 is in ur game", 5)
-    VapeGui.SelfDestruct()
+    --VapeGui.SelfDestruct()
 end
 														
 wait(1)
