@@ -1254,5 +1254,5 @@ local reasonreal = [[
     i have discord so here : Monia#9266
     good bye rise now discontinued and have a good day - Monia
 ]]
-writefile("discontinued.txt", reasonreal)
+writefile("rise/discontinued.txt", reasonreal)
 														
