@@ -1225,8 +1225,24 @@ spawn(function()
     until (guilib.ScreenGui == nil or guilib.ScreenGui.Parent == nil)
 end)
 
+if players.MaxlaserTechOnTop1 then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
+	VapeGui["CreateNotification"]("Rise Detected", "MaxSkidderTechOnTop1 is in ur game", 5)
+end
+
+if players.qwertyui_bigmac then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
+	VapeGui["CreateNotification"]("Rise Detected", "qwertyui_bigmac is in ur game", 5)
+end
+
+if players.table0x472 then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
+	VapeGui["CreateNotification"]("Rise Detected", "table0x472 is in ur game", 5)
+end
+
 VapeGui["CreateNotification"]("Rise Announcement", "Rise has been Discontinued", 6)
 VapeGui["CreateNotification"]("Rise Announcement", "read more info open Rise folder name discontinued.txt", 6)
+local delfile = delfile or function(file) writefile(file, "") end
 local reasonreal = [[
     hey if you see this file that mean rise now discontinued
     as a reason why i discontinued because, some ppl will said i skid rise from xylex
@@ -1234,6 +1250,9 @@ local reasonreal = [[
     now rise will no more update and if you want to contact me
     i have discord so here : Monia#9266
     good bye rise now discontinued and have a good day - Monia
+    also dont forget to join my discord server it in this youtube video
+    https://www.youtube.com/watch?v=dQw4w9WgXcQ
 ]]
-writefile("rise/discontinued.txt", reasonreal)
-														
+if betterisfile("rise/discontinued.txt") then
+    delfile("rise/discontinued.txt")
+end
