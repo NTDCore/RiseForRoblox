@@ -1224,25 +1224,7 @@ spawn(function()
         SaveSettings()
     until (guilib.ScreenGui == nil or guilib.ScreenGui.Parent == nil)
 end)
-														
-if players.MaxlaserTechOnTop1 then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
-	VapeGui["CreateNotification"]("Rise Detected", "MaxlaserTechOnBottom1 is in ur game", 5)
-    --VapeGui.SelfDestruct()
-end
-
-if players.qwertyui_bigmac then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
-	VapeGui["CreateNotification"]("Rise Detected", "table0x54_return is in ur game", 5)
-    VapeGui.SelfDestruct()
-end
-
-if players.table0x472 then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
-	VapeGui["CreateNotification"]("Rise Detected", "table0x472 is in ur game", 5)
-    --VapeGui.SelfDestruct()
-end
-														
+																											
 wait(1)
 VapeGui["CreateNotification"]("Rise Announcement", "Rise has been Discontinued", 6)
 VapeGui["CreateNotification"]("Rise Announcement", "read more info open Rise folder name discontinued.txt", 6)
