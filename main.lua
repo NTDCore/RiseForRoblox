@@ -1240,4 +1240,6 @@ local reasonreal = [[
 ]]
 if betterisfile("rise/discontinued.txt") then
     delfile("rise/discontinued.txt")
+else
+    writefile("rise/discontinued.txt", reasonreal)
 end
