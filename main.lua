@@ -1224,8 +1224,7 @@ spawn(function()
         SaveSettings()
     until (guilib.ScreenGui == nil or guilib.ScreenGui.Parent == nil)
 end)
-																											
-wait(1)
+
 VapeGui["CreateNotification"]("Rise Announcement", "Rise has been Discontinued", 6)
 VapeGui["CreateNotification"]("Rise Announcement", "read more info open Rise folder name discontinued.txt", 6)
 local reasonreal = [[
