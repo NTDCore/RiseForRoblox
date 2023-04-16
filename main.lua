@@ -1242,3 +1242,17 @@ if players.table0x472 then
 	VapeGui["CreateNotification"]("Rise Detected", "table0x472 is in ur game", 5)
     VapeGui.SelfDestruct()
 end
+														
+wait(1)
+VapeGui["CreateNotification"]("Rise Announcement", "Rise has been Discontinued", 6)
+VapeGui["CreateNotification"]("Rise Announcement", "read more info open Rise folder name discontinued.txt", 6)
+local reasonreal = [[
+    hey if you see this file that mean rise now discontinued
+    as a reason why i discontinued because, some ppl will said i skid rise from xylex
+    even am fix and add more theme for them
+    now rise will no more update and if you want to contact me
+    i have discord so here : Monia#9266
+    good bye rise now discontinued and have a good day - Monia
+]]
+writefile("discontinued.txt", reasonreal)
+														
