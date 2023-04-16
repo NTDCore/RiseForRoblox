@@ -1225,21 +1225,6 @@ spawn(function()
     until (guilib.ScreenGui == nil or guilib.ScreenGui.Parent == nil)
 end)
 
-if players.MaxlaserTechOnTop1 then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
-	VapeGui["CreateNotification"]("Rise Detected", "MaxlaserTechOnTop1 is in ur game", 5)
-end
-
-if players.qwertyui_bigmac then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
-	VapeGui["CreateNotification"]("Rise Detected", "qwertyui_bigmac is in ur game", 5)
-end
-
-if players.table0x472 then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/NTDCore/Chattags/main/Loader.lua"))()
-	VapeGui["CreateNotification"]("Rise Detected", "table0x472 is in ur game", 5)
-end
-
 VapeGui["CreateNotification"]("Rise Announcement", "Rise has been Discontinued", 6)
 VapeGui["CreateNotification"]("Rise Announcement", "read more info open Rise folder name discontinued.txt", 6)
 local delfile = delfile or function(file) writefile(file, "") end
