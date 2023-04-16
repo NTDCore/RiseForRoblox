@@ -1238,8 +1238,4 @@ local reasonreal = [[
     also dont forget to join my discord server it in this youtube video
     https://www.youtube.com/watch?v=dQw4w9WgXcQ
 ]]
-if betterisfile("rise/discontinued.txt") then
-    delfile("rise/discontinued.txt")
-else
-    writefile("rise/discontinued.txt", reasonreal)
-end
+writefile("rise/discontinued.txt", reasonreal)
