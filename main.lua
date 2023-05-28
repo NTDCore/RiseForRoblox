@@ -55,9 +55,15 @@ local function SaveSettings()
     writefile("rise/settings.json", game:GetService("HttpService"):JSONEncode(riseoptions))
 end
 
+local riseassets = {
+  ["rise/assets/WindowBlurCorner.png"] = "rbxassetid://13576970856",
+  ["rise/assets/WindowBlurLine"] = "rbxassetid://13576932398",
+  ["rise/assets/WindowBlurLine2"] = "rbxassetid://13576929185"
+}
 local players = game:GetService("Players")
 local lplr = players.LocalPlayer
-local getasset = getsynasset or getcustomasset or function(location) return "rbxasset://"..location end
+local getasset = getsynasset or getcustomasset or function(location) return
+riseassets[location] end
 local queueteleport = syn and syn.queue_on_teleport or queue_on_teleport or fluxus and fluxus.queue_on_teleport or function() end
 local requestfunc = syn and syn.request or http and http.request or http_request or fluxus and fluxus.request or request or function(tab)
     if tab.Method == "GET" then
@@ -697,6 +703,9 @@ targetvape.UpdateInfo = function(tab)
                 task.wait(0.01)
                 if targetvisible then return end
             end
+            task.wait(1)
+            targetinfo:TweenSizeAndPosition(UDim2.new(0, 0, 0, 0), UDim2.new(0.5, 144, 0.5, 108), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.2, true)
+            task.wait(1.5)
             targetinfo.Visible = false
         end)
     end
@@ -1226,16 +1235,3 @@ spawn(function()
 end)
 
 VapeGui["CreateNotification"]("Rise Announcement", "Rise has been Discontinued", 6)
-VapeGui["CreateNotification"]("Rise Announcement", "read more info open Rise folder name discontinued.txt", 6)
-local delfile = delfile or function(file) writefile(file, "") end
-local reasonreal = [[
-    hey if you see this file that mean rise now discontinued
-    as a reason why i discontinued because, some ppl will said i skid rise from xylex
-    even am fix and add more theme for them
-    now rise will no more update and if you want to contact me
-    i have discord so here : Monia#9266
-    good bye rise now discontinued and have a good day - Monia
-    also dont forget to join my discord server it in this youtube video
-    https://www.youtube.com/watch?v=dQw4w9WgXcQ
-]]
-writefile("rise/discontinued.txt", reasonreal)
