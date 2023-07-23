@@ -57,13 +57,21 @@ end
 
 local riseassets = {
   ["rise/assets/WindowBlurCorner.png"] = "rbxassetid://13576970856",
-  ["rise/assets/WindowBlurLine"] = "rbxassetid://13576932398",
-  ["rise/assets/WindowBlurLine2"] = "rbxassetid://13576929185"
+  ["rise/assets/WindowBlurLine.png"] = "rbxassetid://13576932398",
+  ["rise/assets/WindowBlurLine2.png"] = "rbxassetid://13576929185"
 }
 local players = game:GetService("Players")
 local lplr = players.LocalPlayer
-local getasset = getsynasset or getcustomasset or function(location) return
-riseassets[location] end
+local inputService = game:GetService("UserInputService")
+if inputService:GetPlatform() ~= Enum.Platform.Windows then 
+	--mobile exploit fix
+	getgenv().getsynasset = nil
+	getgenv().getcustomasset = nil
+	-- why is this needed
+	getsynasset = nil
+	getcustomasset = nil
+end
+local getcustomasset = getsynasset or getcustomasset or function(location) return riseassets[location] or "" end
 local queueteleport = syn and syn.queue_on_teleport or queue_on_teleport or fluxus and fluxus.queue_on_teleport or function() end
 local requestfunc = syn and syn.request or http and http.request or http_request or fluxus and fluxus.request or request or function(tab)
     if tab.Method == "GET" then
